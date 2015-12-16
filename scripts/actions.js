@@ -6,4 +6,9 @@ $(function() {
     user.register();
   });
 
+  $('#login').on('submit', function(event) {
+    event.preventDefault();
+    user.login();
+  });
+
 });

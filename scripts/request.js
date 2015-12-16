@@ -24,50 +24,42 @@ var request = {
     return false;
   },
 
-  get: function(path, callback, token) {
+  get: function(path, callback) {
     api.ajax({
       method: 'GET',
       url: api.url + path,
-      headers: {
-        Authorization: "Token token=" + token
-      },
+      headers: this.authorize() || null,
       dataType: 'json'
     }, callback);
   },
 
-  post: function(path, data, callback, token) {
+  post: function(path, data, callback) {
     api.ajax({
       method: 'POST',
       url: api.url + path,
-      headers: {
-        Authorization: "Token token=" + token
-      },
+      headers: this.authorize() || null,
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(data),
       dataType: 'json'
     }, callback);
   },
 
-  update: function(path, data, callback, token) {
+  update: function(path, data, callback) {
     api.ajax({
       method: 'PATCH',
       url: api.url + path,
-      headers: {
-        Authorization: "Token token=" + token
-      },
+      headers: this.authorize() || null,
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(portion),
       dataType: 'json'
     }, callback);
   },
 
-  destroy: function(path, id, callback, token) {
+  destroy: function(path, id, callback) {
     api.ajax({
       method: 'DELETE',
       url: api.url + path + id,
-      headers: {
-        Authorization: "Token token=" + token
-      }
+      headers: this.authorize() || null
     }, callback);
   }
 
