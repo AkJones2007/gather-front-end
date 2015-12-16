@@ -29,10 +29,14 @@
         <h2>My Gatherings</h2>
         {{#each gatherings}}
           <li>
-            <h3>{{title}} {{date}} {{location}}</h3>
+            <a href="#" class="view-gathering-button" data-id={{id}}>
+              <h3>{{title}} {{date}} {{location}}</h3>
+            </a>
+            <button class="edit-gathering-button" data-id={{id}}>Edit</button>
+            <button class="remove-gathering-button" data-id={{id}}>Remove</button>
           </li>
         {{/each}}
-        <button id="create-gathering-button">New Gathering</button>
+        <button class="create-gathering-button">New Gathering</button>
       </script>
 
       <!-- Create Gathering -->
@@ -47,6 +51,27 @@
         </form>
       </script>
 
+      <!-- Show Gathering -->
+      <script id="single-gathering-component" type="text/x-handlebars-template">
+        <h1>{{title}}</h1>
+        <h2>{{date}}</h2>
+        <h2>{{location}}</h2>
+        <p>{{description}}<p>
+        <a href="#" class="gatherings-back-button">Back</a>
+        <button class="edit-gathering-button" data-id={{id}}>Edit</button>
+      </script>
+
+      <!-- Edit Gathering -->
+      <script id="edit-gathering-component" type="text/x-handlebars-template">
+        <h1>Edit Gathering</h1>
+        <form id="gathering-update">
+          <input name="title" type="text" value="{{title}}">
+          <input name="date" type="text" value="{{date}}">
+          <input name="location" type="text" value="{{location}}">
+          <textarea name="description">{{description}}</textarea>
+          <input name="submit" type="submit" value="Submit">
+        </form>
+      </script>
 
 
   </head>

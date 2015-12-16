@@ -1,5 +1,13 @@
 var render = {
 
+  handlebars: function(data, component) {
+    $('dashboard-content').empty();
+    var componentID = '#' + component + '-component';
+    var template = Handlebars.compile($(componentID).html());
+    var content = template(data);
+    $('#dashboard-content').html(content);
+  },
+
   user: function() {
     if(user.current) {
       $('#login-register-view').hide();
@@ -8,48 +16,67 @@ var render = {
   },
 
   myProfile: function() {
-    if(user.profile) {
-      $('#dashboard-content').empty();
-
-      var template = Handlebars.compile($('#user-profile-component').html());
-      var content = template(user.profile);
-      $('#dashboard-content').html(content);
+    var profile = user.profile;
+    if(profile) {
+      render.handlebars(profile, 'user-profile');
     }
   },
 
   myGatherings: function() {
-    if(user.gatherings) {
-      $('#dashboard-content').empty();
+    request.get('profile/gatherings', function(error, data) {
+      var gatherings = {gatherings: data.gatherings};
 
-      var template = Handlebars.compile($('#gatherings-list-component').html());
-      var content = template({gatherings: user.gatherings});
-      $('#dashboard-content').html(content);
+      render.handlebars(gatherings, 'gatherings-list');
 
-      $('#create-gathering-button').on('click', function(event) {
-        event.preventDefault();
+      handler.button('view-gathering', function(gatheringID) {
+        render.viewGathering(gatheringID);
+      });
+
+      handler.button('create-gathering', function() {
         render.createGathering();
       });
-    }
+
+      handler.button('edit-gathering', function(gatheringID) {
+        render.editGathering(gatheringID);
+      });
+
+      handler.button('remove-gathering', function(gatheringID) {
+        gathering.remove(gatheringID);
+      });
+    });
   },
 
   createGathering: function() {
     if(user.current) {
-      $('#dashboard-content').empty();
+      render.handlebars({}, 'create-gathering');
 
-      var template = Handlebars.compile($('#create-gathering-component').html());
-      console.log(template);
-
-      var content = template({});
-      console.log(content);
-
-      $('#dashboard-content').html(content);
-
-      $('#gathering').on('submit', function(event) {
-        event.preventDefault();
+      handler.submit('gathering', function() {
         gathering.create();
       });
     }
   },
 
+  viewGathering: function(id) {
+    var path = 'gatherings/' + id;
+    request.get(path, function(error, data) {
+      render.handlebars(data.gatherings, 'single-gathering');
+      handler.button('gatherings-back', function() {
+        render.myGatherings();
+      });
+      handler.button('edit-gathering', function() {
+        render.editGathering();
+      });
+    });
+  },
+
+  editGathering: function(id) {
+    var path = 'gatherings/' + id;
+    request.get(path, function(error, data) {
+      render.handlebars(data.gatherings, 'edit-gathering');
+      handler.submit('gathering-update', function() {
+        gathering.update(id);
+      });
+    });
+  }
 
 }

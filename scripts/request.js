@@ -44,21 +44,21 @@ var request = {
     }, callback);
   },
 
-  update: function(path, data, callback) {
+  patch: function(path, data, callback) {
     api.ajax({
       method: 'PATCH',
       url: api.url + path,
       headers: this.authorize() || null,
       contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(portion),
+      data: JSON.stringify(data),
       dataType: 'json'
     }, callback);
   },
 
-  destroy: function(path, id, callback) {
+  destroy: function(path, callback) {
     api.ajax({
       method: 'DELETE',
-      url: api.url + path + id,
+      url: api.url + path,
       headers: this.authorize() || null
     }, callback);
   }

@@ -38,3 +38,24 @@ $(function() {
   });
 
 });
+
+var handler = {
+
+  button: function(name, callback) {
+    var buttonClass = '.' + name + '-button';
+    $(buttonClass).on('click', function(event) {
+      event.preventDefault();
+      var dataID = $(this).attr('data-id');
+      callback(dataID);
+    });
+  },
+
+  submit: function(name, callback) {
+    $('#' + name).on('submit', function(event) {
+      event.preventDefault();
+
+      callback();
+    });
+  }
+
+};
