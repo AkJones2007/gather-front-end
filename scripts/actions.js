@@ -11,4 +11,9 @@ $(function() {
     user.login();
   });
 
+  $('#gathering').on('submit', function(event) {
+    event.preventDefault();
+    gathering.create();
+  });
+
 });
