@@ -6,6 +6,8 @@ var user = {
   setProfile: function() {
     request.get('profile', function(error, data) {
       user.profile = data;
+      render.user();
+      render.myProfile();
     });
   },
 
@@ -34,7 +36,8 @@ var user = {
       $('#results').append(JSON.stringify(data));
 
       request.post('profile', profile, function(error, data) {
-        $('#results').append(JSON.stringify(data));
+        $('#registration').hide();
+        $('#login').show();
       });
     });
   },

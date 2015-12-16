@@ -1,6 +1,21 @@
 // This file defines click handlers
 $(function() {
 
+  // Login and Register
+  $('#registration').hide();
+
+  $('#show-registration').on('click', function(event) {
+    event.preventDefault();
+    $('#login').hide();
+    $('#registration').show();
+  });
+
+  $('#show-login').on('click', function(event) {
+    event.preventDefault();
+    $('#registration').hide();
+    $('#login').show();
+  });
+
   $('#submit-registration').on('click', function(event) {
     event.preventDefault();
     user.register();
@@ -11,9 +26,15 @@ $(function() {
     user.login();
   });
 
-  $('#gathering').on('submit', function(event) {
+  // Dashboard Navigation
+  $('#dashboard-profile').on('click', function(event) {
     event.preventDefault();
-    gathering.create();
+    render.myProfile();
+  });
+
+  $('#dashboard-gatherings').on('click', function(event) {
+    event.preventDefault();
+    render.myGatherings();
   });
 
 });

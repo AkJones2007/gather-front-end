@@ -6,6 +6,7 @@
 
     <!-- JS Libraries -->
     <script src="assets/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/handlebars.js" type="text/javascript" charset="utf-8"></script>
 
     <!-- Scripts -->
     <script src="scripts/utility.js" type="text/javascript" charset="utf-8"></script>
@@ -13,38 +14,86 @@
     <script src="scripts/actions.js" type="text/javascript" charset="utf-8"></script>
     <script src="scripts/user.js" type="text/javascript" charset="utf-8"></script>
     <script src="scripts/gathering.js" type="text/javascript" charset="utf-8"></script>
+    <script src="scripts/render.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- COMPONENTS -->
+
+      <!-- User Profile -->
+      <script id="user-profile-component" type="text/x-handlebars-template">
+        <h2>{{fname}} {{lname}}</h2>
+        <h3>{{zip_code}}</h3>
+      </script>
+
+      <!-- List Gatherings -->
+      <script id="gatherings-list-component" type="text/x-handlebars-template">
+        <h2>My Gatherings</h2>
+        {{#each gatherings}}
+          <li>
+            <h3>{{title}} {{date}} {{location}}</h3>
+          </li>
+        {{/each}}
+        <button id="create-gathering-button">New Gathering</button>
+      </script>
+
+      <!-- Create Gathering -->
+      <script id="create-gathering-component" type="text/x-handlebars-template">
+        <h1>Create New Gathering</h1>
+        <form id="gathering">
+          <input name="title" type="text" placeholder="Title">
+          <input name="date" type="text" placeholder="Date (YYY-MM-DD)">
+          <input name="location" type="text" placeholder="Location">
+          <textarea name="description" placeholder="Description"></textarea>
+          <input name="submit" type="submit" value="Submit">
+        </form>
+      </script>
+
+
 
   </head>
 
   <body>
 
-    <form id="register">
-      <input name="email" type="text" placeholder="email">
-      <input name="password" type="password" placeholder="password">
-      <input name="password_confirmation" type="password" placeholder="password confirmation">
-    </form>
-    <form id="profile">
-      <input name="fname" type="text" placeholder="First Name">
-      <input name="lname" type="text" placeholder="Last Name">
-      <input name="zip_code" type="text" placeholder="Zip Code">
-    </form>
-    <button id="submit-registration">Send</button>
+    <!-- Register/Login View -->
+    <div id="login-register-view">
 
-    <form id="login">
-      <input name="email" type="text" placeholder="Email">
-      <input name="password" type="password" placeholder="Password">
-      <input name="submit" type="submit" value="Login">
-    </form>
+      <form id="login">
+        <input name="email" type="text" placeholder="Email">
+        <input name="password" type="password" placeholder="Password">
+        <input name="submit" type="submit" value="Login">
+        <a href="#" id="show-registration">Don't have an account? Sign up today!</a>
+      </form>
 
-    <form id="gathering">
-      <input name="title" type="text" placeholder="Title">
-      <input name="date" type="text" placeholder="Date">
-      <input name="location" type="text" placeholder="Location">
-      <textarea name="description" placeholder="Description"></textarea>
-      <input name="submit" type="submit" value="Create Gathering">
-    </form>
+      <div id="registration">
+        <form id="register">
+          <input name="email" type="text" placeholder="email">
+          <input name="password" type="password" placeholder="password">
+          <input name="password_confirmation" type="password" placeholder="password confirmation">
+        </form>
+        <form id="profile">
+          <input name="fname" type="text" placeholder="First Name">
+          <input name="lname" type="text" placeholder="Last Name">
+          <input name="zip_code" type="text" placeholder="Zip Code">
+        </form>
+        <button id="submit-registration">Register</button>
+        <a href="#" id="show-login">Already have an account? Sign in!</a>
+      </div>
 
-    <p id="results"></p>
+    </div>
+
+    <!-- Dashboard View-->
+    <div id="dashboard">
+      <ul id="dashboard-nav">
+        <lh id="dashboard-welcome"></lh>
+        <li><a href="#" id="dashboard-profile">Profile</a></li>
+        <li><a href="#" id="dashboard-gatherings">Gatherings</a></li>
+        <li><a href="#" id="dashboard-gatherings">Invitations</a></li>
+        <li><a href="#" id="dashboard-friends">Friends</a></li>
+        <li><a href="#" id="dashboard-friends">Friend Requests</a></li>
+      </ul>
+      <ul id="dashboard-list"></ul>
+      <div id="dashboard-content">
+      </div>
+    </div>
 
   </body>
 
