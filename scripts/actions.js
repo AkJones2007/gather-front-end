@@ -37,6 +37,16 @@ $(function() {
     render.myGatherings();
   });
 
+  $('#dashboard-friends').on('click', function(event) {
+    event.preventDefault();
+    render.friendList();
+  });
+
+  $('#dashboard-friend-requests').on('click', function(event) {
+    event.preventDefault();
+    render.friendRequests();
+  });
+
   $('#dashboard-search-button').on('click', function(event) {
     event.preventDefault();
     friend.search();

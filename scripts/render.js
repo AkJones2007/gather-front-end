@@ -20,6 +20,7 @@ var render = {
     if(profile) {
       render.handlebars(profile, 'user-profile');
     }
+    $('.back-button').hide();
   },
 
   myGatherings: function() {
@@ -89,6 +90,89 @@ var render = {
 
   profileSearchResults: function(results) {
     render.handlebars(results, 'profile-search-results');
+
+    handler.button('view-profile', function(id) {
+      var path = 'profiles/' + id;
+      request.get(path, function(error, data) {
+        render.handlebars(data, 'user-profile');
+      });
+    });
+
+    handler.button('add-friend', function(id) {
+      var friendID = Number(id);
+      var friendData = utility.wrapObject('friend', {user_id: friendID});
+
+      request.post('friends', friendData, function(error, data) {
+        $('#dashboard-content').html('Friend request sent!');
+        setTimeout(function() {
+          render.profileSearchResults(results);
+        },750);
+      });
+    });
+  },
+
+  friendList: function() {
+    request.get('profile/friends', function(error, data) {
+      render.handlebars(data, 'list-friends');
+      $('.add-friend-button').hide();
+      handler.button('view-profile', function(id) {
+        var path = 'profiles/' + id;
+        request.get(path, function(error, data) {
+          render.handlebars(data, 'user-profile');
+          handler.button('back', function() {
+            render.friendList();
+          });
+        });
+      });
+
+      handler.button('remove-friend', function(id) {
+        var path = 'friends/' + id;
+        request.destroy(path, function() {
+          $('#dashboard-content').html('Friend removed!');
+          setTimeout(function() {
+            render.friendList();
+          },750);
+        });
+      });
+
+    });
+  },
+
+  friendRequests: function() {
+    request.get('profile/friend-requests', function(error, data) {
+      render.handlebars(data, 'list-requests');
+
+      handler.button('view-profile', function(id) {
+        var path = 'profiles/' + id;
+        request.get(path, function(error, data) {
+          render.handlebars(data, 'user-profile');
+          handler.button('back', function() {
+            render.friendRequests();
+          });
+        });
+      });
+
+      handler.button('accept-request', function(id) {
+        var path = 'friends/' + id;
+        request.patch(path, { friend: { accepted: true } }, function(error, data) {
+          $('#dashboard-content').html('Friend request accepted!');
+          setTimeout(function() {
+            render.friendRequests();
+          },750);
+        });
+      });
+
+      handler.button('decline-request', function(id) {
+        var path = 'friends/' + id;
+        request.destroy(path, function() {
+          $('#dashboard-content').html('Friend request declined!');
+          setTimeout(function() {
+            render.friendRequests();
+          },750);
+        });
+      });
+
+    });
   }
 
 }

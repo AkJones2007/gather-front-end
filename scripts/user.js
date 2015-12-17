@@ -49,10 +49,10 @@ var user = {
     request.post('login', credentials, function(error, data) {
       user.current = data.user;
       user.setProfile();
-      user.setAttribute('friends');
-      user.setFriendRequests();
-      user.setAttribute('gatherings');
-      user.setAttribute('invitations');
+      // user.setAttribute('friends');
+      // user.setFriendRequests();
+      // user.setAttribute('gatherings');
+      // user.setAttribute('invitations');
     });
   }
 

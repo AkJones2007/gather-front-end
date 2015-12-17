@@ -23,6 +23,7 @@
       <script id="user-profile-component" type="text/x-handlebars-template">
         <h2>{{fname}} {{lname}}</h2>
         <h3>{{zip_code}}</h3>
+        <button class="back-button">Back</button>
       </script>
 
       <!-- List Gatherings -->
@@ -82,10 +83,46 @@
         <ul>
           {{#each profiles}}
             <li>
-              <h3><a href="#" class="view-profile-button">{{fname}} {{lname}}</a> {{zip_code}}</h3>
+              <h3><a href="#" class="view-profile-button" data-id={{id}}>{{fname}} {{lname}}</a> {{zip_code}}</h3>
+              <button class="add-friend-button" data-id={{id}}>Add Friend</button>
             </li>
           {{/each}}
         </ul>
+      </script>
+
+      <!-- List Friends -->
+      <script id="list-friends-component" type="text/x-handlebars-template">
+        <h2>Friends</h2>
+        {{#if friends}}
+        <ul>
+          {{#each friends}}
+            <li data-id={{id}}>
+              <h3><a href="#" class="view-profile-button" data-id={{user_id}}>{{fname}} {{lname}}</a> {{zip_code}}</h3>
+            </li>
+            <button class="remove-friend-button" data-id={{id}}>Unfriend</button>
+          {{/each}}
+        </ul>
+        {{else}}
+        You have no friends
+        {{/if}}
+      </script>
+
+      <!-- List Friend Requests -->
+      <script id="list-requests-component" type="text/x-handlebars-template">
+          <h2>Friend Requests</h2>
+          {{#if friends}}
+          <ul>
+            {{#each friends}}
+              <li data-id={{id}}>
+                <h3><a href="#" class="view-profile-button">{{fname}} {{lname}}</a> {{zip_code}}</h3>
+                <button class="accept-request-button" data-id={{id}}>Accept</button>
+                <button class="decline-request-button" data-id={{id}}>Decline</button>
+              </li>
+            {{/each}}
+          </ul>
+          {{else}}
+          You have no friend requests
+          {{/if}}
       </script>
 
 
@@ -128,7 +165,7 @@
         <li><a href="#" id="dashboard-gatherings">Gatherings</a></li>
         <li><a href="#" id="dashboard-gatherings">Invitations</a></li>
         <li><a href="#" id="dashboard-friends">Friends</a></li>
-        <li><a href="#" id="dashboard-friends">Friend Requests</a></li>
+        <li><a href="#" id="dashboard-friend-requests">Friend Requests</a></li>
         <li id="dashboard-search">
           <input id="dashboard-search-query" type="text">
           <button id="dashboard-search-button">Search</button>
