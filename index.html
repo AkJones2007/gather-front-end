@@ -14,6 +14,7 @@
     <script src="scripts/actions.js" type="text/javascript" charset="utf-8"></script>
     <script src="scripts/user.js" type="text/javascript" charset="utf-8"></script>
     <script src="scripts/gathering.js" type="text/javascript" charset="utf-8"></script>
+    <script src="scripts/friend.js" type="text/javascript" charset="utf-8"></script>
     <script src="scripts/render.js" type="text/javascript" charset="utf-8"></script>
 
     <!-- COMPONENTS -->
@@ -28,7 +29,7 @@
       <script id="gatherings-list-component" type="text/x-handlebars-template">
         <h2>My Gatherings</h2>
         {{#each gatherings}}
-          <li>
+          <li data-id={{id}}>
             <a href="#" class="view-gathering-button" data-id={{id}}>
               <h3>{{title}} {{date}} {{location}}</h3>
             </a>
@@ -48,6 +49,7 @@
           <input name="location" type="text" placeholder="Location">
           <textarea name="description" placeholder="Description"></textarea>
           <input name="submit" type="submit" value="Submit">
+          <button class="gatherings-back-button">Cancel</button>
         </form>
       </script>
 
@@ -59,6 +61,7 @@
         <p>{{description}}<p>
         <a href="#" class="gatherings-back-button">Back</a>
         <button class="edit-gathering-button" data-id={{id}}>Edit</button>
+        <button class="remove-gathering-button" data-id={{id}}>Remove</button>
       </script>
 
       <!-- Edit Gathering -->
@@ -70,7 +73,19 @@
           <input name="location" type="text" value="{{location}}">
           <textarea name="description">{{description}}</textarea>
           <input name="submit" type="submit" value="Submit">
+          <button class="gatherings-back-button">Cancel</button>
         </form>
+      </script>
+
+      <!-- Show Profile Search Results -->
+      <script id="profile-search-results-component" type="text/x-handlebars-template">
+        <ul>
+          {{#each profiles}}
+            <li>
+              <h3><a href="#" class="view-profile-button">{{fname}} {{lname}}</a> {{zip_code}}</h3>
+            </li>
+          {{/each}}
+        </ul>
       </script>
 
 
@@ -114,6 +129,10 @@
         <li><a href="#" id="dashboard-gatherings">Invitations</a></li>
         <li><a href="#" id="dashboard-friends">Friends</a></li>
         <li><a href="#" id="dashboard-friends">Friend Requests</a></li>
+        <li id="dashboard-search">
+          <input id="dashboard-search-query" type="text">
+          <button id="dashboard-search-button">Search</button>
+        </li>
       </ul>
       <ul id="dashboard-list"></ul>
       <div id="dashboard-content">

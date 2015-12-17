@@ -37,6 +37,15 @@ $(function() {
     render.myGatherings();
   });
 
+  $('#dashboard-search-button').on('click', function(event) {
+    event.preventDefault();
+    friend.search();
+  });
+
+  $('#dashboard-search-query').keyup(function() {
+    friend.search();
+  });
+
 });
 
 var handler = {
@@ -53,7 +62,6 @@ var handler = {
   submit: function(name, callback) {
     $('#' + name).on('submit', function(event) {
       event.preventDefault();
-
       callback();
     });
   }

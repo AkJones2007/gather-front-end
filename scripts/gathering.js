@@ -3,6 +3,7 @@ var gathering = {
   create: function() {
     var gatheringData = utility.formToObject($('#gathering'));
     var gathering = utility.wrapObject('gathering', gatheringData);
+    console.log(gatheringData);
 
     request.post('gatherings', gathering, function(error, data) {
       user.setAttribute('gatherings');
@@ -28,13 +29,11 @@ var gathering = {
     });
   },
 
-  remove: function(id) {
+  remove: function(id, element) {
     var path = 'gatherings/' + id;
-    request.destroy(path, function() {
-      setTimeout(function() {
-        user.setAttribute('gatherings');
-        render.myGatherings(id);
-      }, 500);
+    request.destroy(path, function(error, data) {
+      $("li[data-id=" + id + "]").hide();
+      render.myGatherings();
     });
   }
 

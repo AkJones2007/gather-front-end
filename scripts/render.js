@@ -49,9 +49,11 @@ var render = {
   createGathering: function() {
     if(user.current) {
       render.handlebars({}, 'create-gathering');
-
       handler.submit('gathering', function() {
         gathering.create();
+      });
+      handler.button('gatherings-back', function() {
+        render.myGatherings();
       });
     }
   },
@@ -64,7 +66,10 @@ var render = {
         render.myGatherings();
       });
       handler.button('edit-gathering', function() {
-        render.editGathering();
+        render.editGathering(id);
+      });
+      handler.button('remove-gathering', function(gatheringID) {
+        gathering.remove(gatheringID);
       });
     });
   },
@@ -76,7 +81,14 @@ var render = {
       handler.submit('gathering-update', function() {
         gathering.update(id);
       });
+      handler.button('gatherings-back', function() {
+        render.myGatherings();
+      });
     });
+  },
+
+  profileSearchResults: function(results) {
+    render.handlebars(results, 'profile-search-results');
   }
 
 }
