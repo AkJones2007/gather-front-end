@@ -1,7 +1,7 @@
 // This file provides the framework for talking to the server
 var api = {
 
-  url: 'http://localhost:3000/',
+  url: 'https://still-bayou-1064.herokuapp.com/',
 
   ajax: function(config, cb) {
     $.ajax(config).done(function(data, textStatus, jqxhr) {
