@@ -6,10 +6,6 @@ var friend = {
       console.log(data);
       render.profileSearchResults(data);
     });
-  },
-
-  add: function() {
-
   }
 
 }

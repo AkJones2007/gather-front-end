@@ -4,6 +4,10 @@
   <head>
     <title>Gather</title>
 
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa:400,300,700|Playball|Vollkorn:400,400italic,700,700italic|Volkhov:400,400italic,700,700italic|Kurale' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="styles/style.css">
 
@@ -24,34 +28,44 @@
 
       <!-- User Profile -->
       <script id="user-profile-component" type="text/x-handlebars-template">
-        <h2>{{fname}} {{lname}}</h2>
+        <div class="avatar"></div>
+        <h2 class="profile-h2">Welcome, {{fname}}!</h2>
+        <hr class="hr-style">
+      </script>
+
+      <!-- Other User Profile -->
+      <script id="other-user-profile-component" type="text/x-handlebars-template">
+        <div class="avatar"></div>
+        <h2 class="profile-h2">{{fname}} {{lname}}</h2><br>
         <h3>{{zip_code}}</h3>
-        <button class="back-button">Back</button>
+        <hr class="hr-style">
       </script>
 
       <!-- List Gatherings -->
       <script id="gatherings-list-component" type="text/x-handlebars-template">
         <h2>My Gatherings</h2>
-        {{#each gatherings}}
-          <li data-id={{id}}>
-            <a href="#" class="view-gathering-button" data-id={{id}}>
-              <h3>{{title}} {{date}} {{location}}</h3>
-            </a>
-            <button class="edit-gathering-button" data-id={{id}}>Edit</button>
-            <button class="remove-gathering-button" data-id={{id}}>Remove</button>
-          </li>
-        {{/each}}
-        <button class="create-gathering-button">New Gathering</button>
+        <button class="create-gathering-button list-button">New Gathering</button>
+        <hr class="hr-style">
+          {{#each gatherings}}
+            <li data-id={{id}}>
+              <a href="#" class="view-gathering-button" data-id={{id}}><h3>{{title}}</h3></a><br>
+              {{date}} | {{location}}
+              <button class="remove-gathering-button list-button" data-id={{id}}>Remove</button>
+              <button class="edit-gathering-button list-button" data-id={{id}}>Edit</button>
+            </li>
+          {{/each}}
       </script>
 
       <!-- Create Gathering -->
       <script id="create-gathering-component" type="text/x-handlebars-template">
-        <h1>Create New Gathering</h1>
+        <h2>Create New Gathering</h2>
+        <hr class="hr-style">
         <form id="gathering">
           <input name="title" type="text" placeholder="Title">
-          <input name="date" type="text" placeholder="Date (YYY-MM-DD)">
+          <input name="date" type="text" placeholder="Date (YYYY-MM-DD)">
           <input name="location" type="text" placeholder="Location">
           <textarea name="description" placeholder="Description"></textarea>
+          <br>
           <input name="submit" type="submit" value="Submit">
           <button class="gatherings-back-button">Cancel</button>
         </form>
@@ -59,15 +73,17 @@
 
       <!-- Show Gathering -->
       <script id="single-gathering-component" type="text/x-handlebars-template">
-        <h1>{{title}}</h1>
-        <h2>{{date}}</h2>
-        <h2>{{location}}</h2>
+        <h2>{{title}}</h2>
+        <br>
+        <h3>{{date}}</h3>
+        <h3>{{location}}</h3>
+        <hr class="hr-style">
         <p>{{description}}<p>
         <ul id="gathering-invites-component"></ul>
         <button class="show-friend-invites-button" data-id={{id}}>Invite Friends</button>
-        <a href="#" class="gatherings-back-button">Back</a>
         <button class="edit-gathering-button" data-id={{id}}>Edit</button>
         <button class="remove-gathering-button" data-id={{id}}>Remove</button>
+        <button class="back-button">Back</button>
       </script>
 
       <!-- Show Friends To Invite -->
@@ -91,12 +107,14 @@
 
       <!-- Edit Gathering -->
       <script id="edit-gathering-component" type="text/x-handlebars-template">
-        <h1>Edit Gathering</h1>
+        <h2>Edit Gathering</h2>
+        <hr class="hr-style">
         <form id="gathering-update">
           <input name="title" type="text" value="{{title}}">
           <input name="date" type="text" value="{{date}}">
           <input name="location" type="text" value="{{location}}">
           <textarea name="description">{{description}}</textarea>
+          <br>
           <input name="submit" type="submit" value="Submit">
           <button class="gatherings-back-button">Cancel</button>
         </form>
@@ -104,11 +122,15 @@
 
       <!-- Show Profile Search Results -->
       <script id="profile-search-results-component" type="text/x-handlebars-template">
+        <h2>Search Results</h2>
+        <hr class="hr-style">
         <ul>
           {{#each profiles}}
             <li>
-              <h3><a href="#" class="view-profile-button" data-id={{id}}>{{fname}} {{lname}}</a> {{zip_code}}</h3>
-              <button class="add-friend-button" data-id={{id}}>Add Friend</button>
+              <div class="avatar-list"></div>
+              <h3><a href="#" class="view-profile-button" data-id={{id}}>{{fname}} {{lname}}</a></h3>
+              <br> {{zip_code}}
+              <button class="add-friend-button list-button" data-id={{id}}>Add Friend</button>
             </li>
           {{/each}}
         </ul>
@@ -117,13 +139,17 @@
       <!-- List Friends -->
       <script id="list-friends-component" type="text/x-handlebars-template">
         <h2>Friends</h2>
+        <hr class="hr-style">
         {{#if friends}}
         <ul>
           {{#each friends}}
             <li data-id={{id}}>
-              <h3><a href="#" class="view-profile-button" data-id={{user_id}}>{{fname}} {{lname}}</a> {{zip_code}}</h3>
+              <div class="avatar-list"></div>
+              <h3><a href="#" class="view-profile-button" data-id={{id}}>{{fname}} {{lname}}</a></h3>
+              <br>
+              {{zip_code}}
             </li>
-            <button class="remove-friend-button" data-id={{id}}>Unfriend</button>
+            <button class="remove-friend-button list-button" data-id={{id}}>Unfriend</button>
           {{/each}}
         </ul>
         {{else}}
@@ -134,13 +160,17 @@
       <!-- List Friend Requests -->
       <script id="list-requests-component" type="text/x-handlebars-template">
           <h2>Friend Requests</h2>
+          <hr class="hr-style">
           {{#if friends}}
           <ul>
             {{#each friends}}
               <li data-id={{id}}>
-                <h3><a href="#" class="view-profile-button">{{fname}} {{lname}}</a> {{zip_code}}</h3>
-                <button class="accept-request-button" data-id={{id}}>Accept</button>
-                <button class="decline-request-button" data-id={{id}}>Decline</button>
+                <div class="avatar-list"></div>
+                <h3><a href="#" class="view-profile-button" data-id={{id}}>{{fname}} {{lname}}</a></h3>
+                <br>
+                {{zip_code}}
+                <button class="accept-request-button list-button" data-id={{id}}>Accept</button>
+                <button class="decline-request-button list-button" data-id={{id}}>Decline</button>
               </li>
             {{/each}}
           </ul>
@@ -157,17 +187,17 @@
     <div id="login-register-view">
 
       <header>
-        <h1>Gather</h1>
+        <h1 class="logo">Gather</h1>
       </header>
 
       <div class="modal-background">
         <div class="modal-dialog">
-<!--           <form id="login">
+          <form id="login">
             <input name="email" type="text" placeholder="Email">
             <input name="password" type="password" placeholder="Password">
             <input name="submit" type="submit" value="Login">
-            <a href="#" id="show-registration">Don't have an account? Sign up today!</a>
-          </form> -->
+            <button class="modal-cancel">Cancel</button>
+          </form>
           <form id="register">
             <input name="email" type="text" placeholder="email">
             <input name="password" type="password" placeholder="password">
@@ -177,38 +207,43 @@
             <input name="fname" type="text" placeholder="First Name">
             <input name="lname" type="text" placeholder="Last Name">
             <input name="zip_code" type="text" placeholder="Zip Code">
+            <button class="registration-submit-button">Register</button>
+            <button class="modal-cancel">Cancel</button>
           </form>
-          <button id="submit-registration">Register</button>
-          <a href="#" id="show-login">Already have an account? Sign in!</a>
         </div>
       </div>
 
       <div class="landing-welcome">
-        <h1>Welcome!</h1>
-        <p>Blah Blah Blah</p>
-        <button>Login</button>
-        <button>Register</button>
+        <h1>Gather Together</h1>
+        <span>Invite people to do awesome things.</span>
+        <button class="login-button">Login</button>
+        <button class="register-button">Register</button>
       </div>
 
     </div>
 
     <!-- Dashboard View-->
     <div id="dashboard">
+      <header>
+        <h1 class="logo">Gather</h1>
+      </header>
+
       <ul id="dashboard-nav">
         <lh id="dashboard-welcome"></lh>
-        <li><a href="#" id="dashboard-profile">Profile</a></li>
-        <li><a href="#" id="dashboard-gatherings">Gatherings</a></li>
-        <li><a href="#" id="dashboard-gatherings">Invitations</a></li>
-        <li><a href="#" id="dashboard-friends">Friends</a></li>
-        <li><a href="#" id="dashboard-friend-requests">Friend Requests</a></li>
-        <li id="dashboard-search">
-          <input id="dashboard-search-query" type="text">
-          <button id="dashboard-search-button">Search</button>
+        <li><a href="#" id="dashboard-profile">Profile</a></li><li>
+            <a href="#" id="dashboard-gatherings">Gatherings</a></li><li>
+            <a href="#" id="dashboard-gatherings">Invitations</a></li><li>
+            <a href="#" id="dashboard-friends">Friends</a></li><li>
+            <a href="#" id="dashboard-friend-requests">Friend Requests</a></li><li id="dashboard-search">
+            <input id="dashboard-search-query" type="text">
+            <button id="dashboard-search-button">Search</button>
         </li>
       </ul>
+
       <ul id="dashboard-list"></ul>
       <div id="dashboard-content">
       </div>
+
     </div>
 
   </body>

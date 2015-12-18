@@ -1,11 +1,43 @@
 var render = {
 
+  login: function(show) {
+    if (show) {
+      $('.modal-background').show();
+      $('#login').show();
+    } else {
+      $('.modal-background').hide();
+      $('#login').hide();
+    }
+  },
+
+  register: function(show) {
+    if (show) {
+      $('.modal-background').show();
+      $('#register').show();
+      $('#profile').show();
+    } else {
+      $('.modal-background').hide();
+      $('#register').hide();
+      $('#profile').hide();
+    }
+  },
+
   handlebars: function(data, component) {
     $('dashboard-content').empty();
     var componentID = '#' + component + '-component';
     var template = Handlebars.compile($(componentID).html());
     var content = template(data);
     $('#dashboard-content').html(content);
+  },
+
+  modal: function(name, hidden) {
+    if (hidden) {
+      $('.modal-background').hide();
+      $('#' + name).hide();
+    } else {
+      $('.modal-background').show();
+      $('#' + name).show();
+    }
   },
 
   user: function() {
@@ -72,6 +104,21 @@ var render = {
       handler.button('remove-gathering', function(gatheringID) {
         gathering.remove(gatheringID);
       });
+      handler.button('show-friend-invites', function(gathID) {
+        request.get('profile/friends', function(error, data) {
+          render.handlebars(data, 'invite-friends');
+          handler.button('invite-friend', function(id) {
+            var path = 'gatherings/' + gathID + '/invites';
+            var data = utility.wrapObject('invitation', {profile_id: id})
+            request.post(path, data, function() {
+              $('#dashboard-content').html('Invitation sent!');
+              setTimeout(function() {
+                render.viewGathering(gathID);
+              }, 750);
+            });
+          });
+        })
+      });
     });
   },
 
@@ -94,7 +141,7 @@ var render = {
     handler.button('view-profile', function(id) {
       var path = 'profiles/' + id;
       request.get(path, function(error, data) {
-        render.handlebars(data, 'user-profile');
+        render.handlebars(data, 'other-user-profile');
       });
     });
 
@@ -118,7 +165,7 @@ var render = {
       handler.button('view-profile', function(id) {
         var path = 'profiles/' + id;
         request.get(path, function(error, data) {
-          render.handlebars(data, 'user-profile');
+          render.handlebars(data, 'other-user-profile');
           handler.button('back', function() {
             render.friendList();
           });
@@ -145,7 +192,7 @@ var render = {
       handler.button('view-profile', function(id) {
         var path = 'profiles/' + id;
         request.get(path, function(error, data) {
-          render.handlebars(data, 'user-profile');
+          render.handlebars(data, 'other-user-profile');
           handler.button('back', function() {
             render.friendRequests();
           });
@@ -172,6 +219,12 @@ var render = {
         });
       });
 
+    });
+  },
+
+  userInvitations: function() {
+    request.get('profile/invitations', function(error, data) {
+      render.handlebars(data, '')
     });
   }
 

@@ -49,43 +49,72 @@ a {
 }
 /*** End Reset ***/
 
+input {
+  font-weight: 300;
+}
+
 body {
   font-size: 18px;
+  font-family: 'Raleway', sans-serif;
 }
 
 #login-register-view {
   width: 100%;
   height: 100%;
-  background-image: url("https://esthermagazine.files.wordpress.com/2015/01/silhouette-art6.jpg");
+  background-image: url("http://cx.aos.ask.com/question/aq/1400px-788px/many-people-bottle-champagne-serve_f2c12e904539d904.jpg");
   background-size: cover;
   background-position: center;
   z-index: -1;
+  overflow: hidden;
 }
 
 header {
   width: 100%;
-  height: 40px;
-  padding: 20px;
+  height: auto;
+  padding: 10px 25px;
   background-color: white;
   box-shadow: 0px 4px 8px rgba(0,0,0,.3);
 }
 
 .landing-welcome {
-  width: 750px;
-  height: 400px;
-  margin: 50px auto;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
   text-align: center;
-}
-
-.landing-welcome p{
-  border-bottom: 1px solid white;
-  border-top: 1px solid white;
-  color: white;
+  margin-top: 15%;
 }
 
 .landing-welcome h1 {
+  font-size: 3.5em;
+  font-family: "Volkhov", serif;
+  font-style: italic;
+  font-weight: normal;
   color: white;
-  text-align: center;
+  text-shadow: 4px 4px 4px black;
+}
+
+.landing-welcome span {
+  color: white;
+  font-weight: 300;
+  font-size: 2em;
+  text-shadow: 4px 4px 4px black;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.landing-welcome button {
+  width: auto;
+  background-color: #EB452A;
+  font-weight: 300;
+  color: white;
+  font-size: 1em;
+  padding: 10px 20px;
+  display: inline;
+  margin-right: 10px;
+}
+
+.landing-welcome button:hover {
+  background-color: #EB583A;
 }
 
 .modal-background {
@@ -112,9 +141,185 @@ header {
   margin-bottom: 10px;
 }
 
-.modal-dialog button {
+.modal-dialog button,
+.modal-dialog input[type="submit"] {
   width: 100%;
   font-size: 1em;
   padding: 10px;
   margin-bottom: 10px;
+  background-color: #EB452A;
+  color: white;
+}
+
+.modal-dialog button:hover,
+.modal-dialog input[type="submit"]:hover {
+  background-color: #EB583A;
+}
+
+.modal-dialog input[type="text"],
+.modal-dialog input[type="password"] {
+  border-radius: 8px;
+  border: 1px solid #888;
+}
+
+.logo {
+/*  font-family: 'Comfortaa', cursive;*/
+  font-family: 'Playball', cursive;
+  font-size: 48px;
+}
+
+#dashboard-nav {
+  text-align: center;
+  margin-top: 40px;
+  font-weight: 300;
+}
+
+#dashboard-nav li {
+  display: inline;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+#dashboard-nav li:hover {
+  background-color: lightgray;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+19,eaeaea+100 */
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top,  #ffffff 19%, #eaeaea 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ffffff 19%,#eaeaea 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ffffff 19%,#eaeaea 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 ); /* IE6-9 */
+
+}
+
+#dashboard header {
+  background-color: #EB452A;
+  box-shadow: 0px 4px 8px rgba(0,0,0,.2);
+}
+
+#dashboard header .logo {
+  color: white;
+}
+
+.container {
+  width: 960px;
+}
+
+#dashboard li:last-child {
+  padding: 0;
+}
+
+#dashboard input {
+  font-size: 1em;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #888;
+  margin: 0 10px;
+}
+
+#dashboard button,
+#dashboard input[type="submit"] {
+  font-size: 1em;
+  padding: 5px 10px;
+  background-color: #333;
+  color: white;
+  font-weight: 300;
+}
+
+#dashboard-content {
+  width: 1024px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+#dashboard-content h2 {
+  font-weight: 300;
+  display: inline-block;
+}
+
+hr.hr-style {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+    margin: 20px 0;
+}
+
+.avatar {
+  background-color: black;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+}
+
+.profile-h2 {
+  margin-top: 20px;
+}
+
+#dashboard h3 {
+  font-size: 1em;
+}
+
+.list-button {
+  float: right;
+  margin-left: 10px;
+}
+
+#dashboard-content li {
+  height: auto;
+  padding: 15px 0;
+}
+
+#dashboard-content h3{
+  width: auto;
+  display: inline-block;
+}
+
+#dashboard-content input {
+  margin: 0;
+  padding: 5px 10px;
+}
+
+#dashboard-content input[type="text"] {
+  width: 500px;
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 500px;
+  height: 300px;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  font-weight: 300;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #888;
+}
+
+#dashboard-content input[type="submit"] {
+  border-radius: 0;
+  border: none;
+}
+
+#dashboard-content p {
+  margin-bottom: 40px;
+}
+
+.avatar-list {
+  background-color: black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
 }

@@ -1,30 +1,39 @@
-// This file defines click handlers
 $(function() {
 
-  // Login and Register
-  $('#registration').hide();
+  // Initialize
+  $('.modal-background').hide();
 
-  $('#show-registration').on('click', function(event) {
+  // Login/Register
+  $('.login-button').on('click', function(event) {
     event.preventDefault();
-    $('#login').hide();
-    $('#registration').show();
-  });
-
-  $('#show-login').on('click', function(event) {
-    event.preventDefault();
-    $('#registration').hide();
+    $('.modal-background').show();
     $('#login').show();
+    $('#register').hide();
+    $('#profile').hide();
   });
 
-  $('#submit-registration').on('click', function(event) {
+  $('.register-button').on('click', function(event) {
     event.preventDefault();
-    user.register();
+    $('.modal-background').show();
+    $('#login').hide();
+    $('#register').show();
+    $('#profile').show();
   });
 
   $('#login').on('submit', function(event) {
     event.preventDefault();
     user.login();
   });
+
+  $('.registration-submit-button').on('click', function(event) {
+    event.preventDefault();
+    user.register();
+  });
+
+  $('.modal-cancel').on('click', function(event) {
+    event.preventDefault();
+    $('.modal-background').hide();
+  })
 
   // Dashboard Navigation
   $('#dashboard-profile').on('click', function(event) {
@@ -45,6 +54,11 @@ $(function() {
   $('#dashboard-friend-requests').on('click', function(event) {
     event.preventDefault();
     render.friendRequests();
+  });
+
+  $('#dashboard-invitations').on('click', function(event) {
+    event.preventDefault();
+    render.userInvitations();
   });
 
   $('#dashboard-search-button').on('click', function(event) {
