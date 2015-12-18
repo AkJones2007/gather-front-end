@@ -36,8 +36,7 @@ var user = {
       $('#results').append(JSON.stringify(data));
 
       request.post('profile', profile, function(error, data) {
-        $('#registration').hide();
-        $('#login').show();
+        $('.modal-background').hide();
       });
     });
   },
