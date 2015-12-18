@@ -6,7 +6,7 @@ $(function() {
   // Login/Register
   $('.login-button').on('click', function(event) {
     event.preventDefault();
-    $('.modal-background').show();
+    $('.modal-background').show('fade');
     $('#login').show();
     $('#register').hide();
     $('#profile').hide();
@@ -14,7 +14,7 @@ $(function() {
 
   $('.register-button').on('click', function(event) {
     event.preventDefault();
-    $('.modal-background').show();
+    $('.modal-background').show('fade');
     $('#login').hide();
     $('#register').show();
     $('#profile').show();
@@ -32,7 +32,7 @@ $(function() {
 
   $('.modal-cancel').on('click', function(event) {
     event.preventDefault();
-    $('.modal-background').hide();
+    $('.modal-background').hide('fade');
   })
 
   // Dashboard Navigation
