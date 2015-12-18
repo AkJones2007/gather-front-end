@@ -4,6 +4,9 @@
   <head>
     <title>Gather</title>
 
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+
     <!-- JS Libraries -->
     <script src="assets/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="assets/handlebars.js" type="text/javascript" charset="utf-8"></script>
@@ -60,10 +63,31 @@
         <h2>{{date}}</h2>
         <h2>{{location}}</h2>
         <p>{{description}}<p>
+        <ul id="gathering-invites-component"></ul>
+        <button class="show-friend-invites-button" data-id={{id}}>Invite Friends</button>
         <a href="#" class="gatherings-back-button">Back</a>
         <button class="edit-gathering-button" data-id={{id}}>Edit</button>
         <button class="remove-gathering-button" data-id={{id}}>Remove</button>
       </script>
+
+      <!-- Show Friends To Invite -->
+      <script id="invite-friends-component" type="text/x-handlebars-template">
+        {{#if friends}}
+        <ul>
+          {{#each friends}}
+            <li data-id={{id}}>
+              <h4>{{fname}} {{lname}}</h4>
+            </li>
+            <button class="invite-friend-button" data-id={{id}}>Invite Friend</button>
+          {{/each}}
+        </ul>
+        {{else}}
+        You have no friends
+        {{/if}}
+      </script>
+
+      <!-- Show Gathering Invites -->
+
 
       <!-- Edit Gathering -->
       <script id="edit-gathering-component" type="text/x-handlebars-template">
@@ -125,7 +149,6 @@
           {{/if}}
       </script>
 
-
   </head>
 
   <body>
@@ -133,26 +156,38 @@
     <!-- Register/Login View -->
     <div id="login-register-view">
 
-      <form id="login">
-        <input name="email" type="text" placeholder="Email">
-        <input name="password" type="password" placeholder="Password">
-        <input name="submit" type="submit" value="Login">
-        <a href="#" id="show-registration">Don't have an account? Sign up today!</a>
-      </form>
+      <header>
+        <h1>Gather</h1>
+      </header>
 
-      <div id="registration">
-        <form id="register">
-          <input name="email" type="text" placeholder="email">
-          <input name="password" type="password" placeholder="password">
-          <input name="password_confirmation" type="password" placeholder="password confirmation">
-        </form>
-        <form id="profile">
-          <input name="fname" type="text" placeholder="First Name">
-          <input name="lname" type="text" placeholder="Last Name">
-          <input name="zip_code" type="text" placeholder="Zip Code">
-        </form>
-        <button id="submit-registration">Register</button>
-        <a href="#" id="show-login">Already have an account? Sign in!</a>
+      <div class="modal-background">
+        <div class="modal-dialog">
+<!--           <form id="login">
+            <input name="email" type="text" placeholder="Email">
+            <input name="password" type="password" placeholder="Password">
+            <input name="submit" type="submit" value="Login">
+            <a href="#" id="show-registration">Don't have an account? Sign up today!</a>
+          </form> -->
+          <form id="register">
+            <input name="email" type="text" placeholder="email">
+            <input name="password" type="password" placeholder="password">
+            <input name="password_confirmation" type="password" placeholder="password confirmation">
+          </form>
+          <form id="profile">
+            <input name="fname" type="text" placeholder="First Name">
+            <input name="lname" type="text" placeholder="Last Name">
+            <input name="zip_code" type="text" placeholder="Zip Code">
+          </form>
+          <button id="submit-registration">Register</button>
+          <a href="#" id="show-login">Already have an account? Sign in!</a>
+        </div>
+      </div>
+
+      <div class="landing-welcome">
+        <h1>Welcome!</h1>
+        <p>Blah Blah Blah</p>
+        <button>Login</button>
+        <button>Register</button>
       </div>
 
     </div>

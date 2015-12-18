@@ -1,0 +1,120 @@
+/*** Reset Defaults ***/
+
+/* Global */
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* Forms */
+input {
+  border: none;
+  outline: none;
+
+  /* keeps width from extending beyond defined space */
+  -webkit-box-sizing : border-box;‌​
+  -moz-box-sizing : border-box;
+  box-sizing : border-box;
+}
+
+button {
+  border: none;
+}
+
+select {
+  border: none;
+  outline: none;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/*** End Reset ***/
+
+body {
+  font-size: 18px;
+}
+
+#login-register-view {
+  width: 100%;
+  height: 100%;
+  background-image: url("https://esthermagazine.files.wordpress.com/2015/01/silhouette-art6.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+header {
+  width: 100%;
+  height: 40px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0,0,0,.3);
+}
+
+.landing-welcome {
+  width: 750px;
+  height: 400px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.landing-welcome p{
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  color: white;
+}
+
+.landing-welcome h1 {
+  color: white;
+  text-align: center;
+}
+
+.modal-background {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.75);
+  z-index: 0;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.modal-dialog {
+  width: 400px;
+  background-color: white;
+  margin: 100px auto;
+  padding: 50px;
+}
+
+.modal-dialog input {
+  width: 100%;
+  font-size: 1em;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-dialog button {
+  width: 100%;
+  font-size: 1em;
+  padding: 10px;
+  margin-bottom: 10px;
+}
