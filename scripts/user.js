@@ -48,7 +48,7 @@ var user = {
     request.post('login', credentials, function(error, data) {
       user.current = data.user;
       user.setProfile();
-      $('#login-register-view').hide();
+      $('#login-register-view').hide('blind');
       // user.setAttribute('friends');
       // user.setFriendRequests();
       // user.setAttribute('gatherings');
